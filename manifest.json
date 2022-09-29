@@ -1,0 +1,13 @@
+{
+    "name": "Send to translator",
+    "description": "Send selected text to a translator",
+    "manifest_version": 3,
+    "permissions": [ 
+        "contextMenus" 
+    ],
+    "background": {
+        "service_worker": "main.js" 
+    },
+    "version": "0.0"
+ }
+ 
