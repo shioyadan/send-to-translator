@@ -2,7 +2,8 @@ const ID_DEEPL = "ID_DEEPL";
 const ID_GOOGLE_TRANSLATE = "ID_GOOGLE_TRANSLATE";
 const DESTINATION_LANGUAGE = "ja";
 
-const TITLE_PATTERN = /^the|of|at|to|on|in|for|by|with|from|before|after|about|near|until|as|during|over|off|through|above|below|against|around|among|between|into|under|along|without|within|inside|beside$/;
+// タイトル中に小文字で出てきても良い単語
+const TITLE_EXCEPTION_PATTERN = /^the|of|at|to|on|in|for|by|with|from|before|after|about|near|until|as|during|over|off|through|above|below|against|around|among|between|into|under|along|without|within|inside|beside$/;
 
 /**
  * タイトルを検出して改行を入れる
@@ -22,7 +23,7 @@ function convertTitle(text) {
             // ただし前置詞や the は小文字でもよいとする
             let tokens = line.split(" ");
             for (let t of tokens) {
-                if (!t.match(/^[A-Z0-9]/) && !t.match(TITLE_PATTERN)) {    
+                if (!t.match(/^[A-Z0-9]/) && !t.match(TITLE_EXCEPTION_PATTERN)) {    
                     title = false;
                     break;
                 }
@@ -58,6 +59,7 @@ function send(id, lang, text) {
     
     const urlEncoded = encodeURIComponent(escaped);
 
+    // URL に埋め込んで新しいタブで開く
     let url = "";
     if (id == ID_DEEPL) {
         url = `https://www.deepl.com/translator#${lang}/${DESTINATION_LANGUAGE}/${urlEncoded}`;
@@ -79,12 +81,12 @@ function main() {
     // コンテクストメニューの追加
     chrome.contextMenus.create({
         "id": ID_DEEPL,
-        "title": "DeepLに送る",
+        "title": "DeepL",
         "contexts": ["selection"]
     });
     chrome.contextMenus.create({
         "id": ID_GOOGLE_TRANSLATE,
-        "title": "Google翻訳に送る",
+        "title": "Google翻訳",
         "contexts": ["selection"]
     });
 

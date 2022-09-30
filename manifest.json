@@ -1,5 +1,5 @@
 {
-    "name": "Send to translator",
+    "name": "翻訳へ送る",
     "description": "Send selected text to a translator",
     "manifest_version": 3,
     "permissions": [ 
