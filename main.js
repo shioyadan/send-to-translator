@@ -2,6 +2,43 @@ const ID_DEEPL = "ID_DEEPL";
 const ID_GOOGLE_TRANSLATE = "ID_GOOGLE_TRANSLATE";
 const DESTINATION_LANGUAGE = "ja";
 
+const TITLE_PATTERN = /^the|of|at|to|on|in|for|by|with|from|before|after|about|near|until|as|during|over|off|through|above|below|against|around|among|between|into|under|along|without|within|inside|beside$/;
+
+/**
+ * タイトルを検出して改行を入れる
+ * @param {string} text 
+ */
+function convertTitle(text) {
+    let lines = text.split("  ");
+    let result = "";
+    for (let line of lines) {
+        // ピリオドがなく，単語が全部大文字始まりの行はタイトルとみなす
+        let title = false;
+        if (!line.match(/\.$/)) {
+            // ピリオドでおわっていない
+            title = true;
+
+            // 単語の頭が大文字じゃないかを検査
+            // ただし前置詞や the は小文字でもよいとする
+            let tokens = line.split(" ");
+            for (let t of tokens) {
+                if (!t.match(/^[A-Z0-9]/) && !t.match(TITLE_PATTERN)) {    
+                    title = false;
+                    break;
+                }
+            }
+        }
+
+        if (title) {
+            result = result + "\n" + line + "\n";   // タイトル前にも改行を入れる
+        }
+        else {
+            result = result + line + "  ";
+        }
+    }
+    return result;
+}
+
 /**
  * @param {string|number} id 
  * @param {string} lang
@@ -14,6 +51,7 @@ function send(id, lang, text) {
     escaped = 
         escaped.replaceAll("/", "\\/").
                 replaceAll("|", "\\|");
+    escaped = convertTitle(escaped);
     escaped = escaped.replaceAll(".  ", ".\n"); // ピリオドで終わっている改行はパラグラフとみなす
     escaped = escaped.replaceAll("-  ", "");    // 行末のハイフネーションを解除
     escaped = escaped.replaceAll("  ", " ");    // PDF では改行がスペース２つになるのを１つに戻す．これは最後にやらないと，上の２つが無意味になる．
