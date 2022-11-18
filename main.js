@@ -62,7 +62,7 @@ function send(id, lang, text) {
     // URL に埋め込んで新しいタブで開く
     let url = "";
     if (id == ID_DEEPL) {
-        url = `https://www.deepl.com/translator#${lang}/${DESTINATION_LANGUAGE}/${urlEncoded}`;
+        url = `https://www.deepl.com/translator?share=generic#${lang}/${DESTINATION_LANGUAGE}/${urlEncoded}`;
     }
     else if (id == ID_GOOGLE_TRANSLATE){
         url = `https://translate.google.co.jp/?sl=${lang}&tl=${DESTINATION_LANGUAGE}&text=${urlEncoded}`;
