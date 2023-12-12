@@ -3,7 +3,7 @@ const ID_GOOGLE_TRANSLATE = "ID_GOOGLE_TRANSLATE";
 const DESTINATION_LANGUAGE = "ja";
 
 // タイトル中に小文字で出てきても良い単語
-const TITLE_EXCEPTION_PATTERN = /^and|the|of|at|to|on|in|for|by|with|from|before|after|about|near|until|as|during|over|off|through|above|below|against|around|among|between|into|under|along|without|within|inside|beside$/;
+const TITLE_EXCEPTION_PATTERN = /^(and|the|of|at|to|on|in|for|by|with|from|before|after|about|near|until|as|during|over|off|through|above|below|against|around|among|between|into|under|along|without|within|inside|beside)$/;
 
 /**
  * タイトルを検出して改行を入れる
