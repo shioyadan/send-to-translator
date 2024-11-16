@@ -108,4 +108,8 @@ function main() {
 
 }
 
-main();
+chrome.runtime.onInstalled.addListener(() => {
+    main();
+});
+
+
