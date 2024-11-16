@@ -80,15 +80,17 @@ function send(id, lang, text) {
 
 function main() {
     // コンテクストメニューの追加
-    chrome.contextMenus.create({
-        "id": ID_DEEPL,
-        "title": "DeepL",
-        "contexts": ["selection"]
-    });
-    chrome.contextMenus.create({
-        "id": ID_GOOGLE_TRANSLATE,
-        "title": "Google翻訳",
-        "contexts": ["selection"]
+    chrome.contextMenus.removeAll(() => {
+        chrome.contextMenus.create({
+            "id": ID_DEEPL,
+            "title": "DeepL",
+            "contexts": ["selection"]
+        });
+        chrome.contextMenus.create({
+            "id": ID_GOOGLE_TRANSLATE,
+            "title": "Google翻訳",
+            "contexts": ["selection"]
+        });
     });
 
     // クリックハンドラの登録
@@ -107,9 +109,6 @@ function main() {
     });
 
 }
-
-chrome.runtime.onInstalled.addListener(() => {
-    main();
-});
+main();
 
 
