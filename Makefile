@@ -1,2 +1,2 @@
 init:
-	npm install --save-dev @types/chrome
+	npm install
