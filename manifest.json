@@ -4,8 +4,8 @@
     "manifest_version": 3,
     "permissions": [ 
         "contextMenus",
-        "tabs",
-        "i18n"
+        "offscreen",
+        "clipboardWrite"
     ],
     "background": {
         "service_worker": "main.js" 
