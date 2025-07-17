@@ -3,11 +3,13 @@
     "description": "Send selected text to a translator",
     "manifest_version": 3,
     "permissions": [ 
-        "contextMenus" 
+        "contextMenus",
+        "tabs",
+        "i18n"
     ],
     "background": {
         "service_worker": "main.js" 
     },
-    "version": "0.0.1"
+    "version": "0.1"
  }
  
